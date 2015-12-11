@@ -13,68 +13,67 @@ public class Main {
     public static void main( String args[] ) throws SQLException {
         OpenDB();
         printMenu();
-       while (true){
+        while (true){
            boolean end = false;
            System.out.println("Show menu - 0");
            System.out.println("Press a key: ");
-            DAO.openConection();
-            String c = in.next();
-            switch (c){
-                case "0":
+           DAO.openConection();
+           int idx = Integer.parseInt(in.next());
+           Key key = Key.values()[idx];
+           switch (key){
+                case MENU:
                     printMenu();
                     break;
-                case "1" :
+                case ADD_CLIENT:
                     addClient();
                     break;
-                case "2" :
+                case ADD_PRODUCT:
                     addProduct();
                     break;
-                case "3" :
+                case ADD_CHARTER:
                     addCharter();
                     break;
-                case "4" :
+                case ADD_PRODUCT_TO_CHARTER:
                     addProductToCharter();
                     break;
-                case "5" :
+                case PRINT_CLIENTS:
                     printClientsList();
                     break;
-                case "6" :
+                case PRINT_PRODUCTS:
                     printProductsList();
                     break;
-                case "7" :
+                case PRINT_CHARTERS_OF_CLIENT:
                     printChartersOfClient();
                     break;
-                case "8" :
+                case PRINT_PRODUCTS_OF_CHARTER:
                     printProductsOfCharter();
                     break;
-                case "9" :
+                case PRINT_CHARTERS_OF_PRODUCT:
                     printChartersOfProduct();
                     break;
-                case "10" :
+                case DELETE_CLIENT:
                     deleteClient();
                     break;
-                case "11" :
+                case DELETE_PRODUCT:
                     deleteProduct();
                     break;
-                case "12" :
+                case DELETE_CHARTER:
                     deleteCharter();
                     break;
-                case "13" :
+                case DELTETE_PRODUCT_FROM_CHARTER:
                     deleteProductFromCharter();
                     break;
-                case "14":
+                case UPDATE_NAME:
                     updateName();
                     break;
-                case "15":
+                case END:
                     end = true;
                     break;
                 default:
                     System.out.println("Wrong key!");
             }
            if (end) break;
-           DAO.closeConnection();
         }
-        DAO.closeConnection();
     }
 
     private static void printMenu(){
@@ -112,7 +111,7 @@ public class Main {
 
     private static void addClient(){
         try {
-            System.out.println("Enter a name of user: ");
+            System.out.println("Enter a name of client: ");
             String name = in.next();
             int addedClient = DAO.addClient(name);
             if (addedClient == -1) {
@@ -142,7 +141,7 @@ public class Main {
     }
     private static void addCharter(){
         try {
-            System.out.println("Enter ID of user: ");
+            System.out.println("Enter ID of client: ");
             int ID = in.nextInt();
             int addedCharter = DAO.addCharter(ID);
             if (addedCharter == -1) {
